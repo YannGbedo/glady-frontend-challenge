@@ -1,4 +1,4 @@
-export interface PickerValues {
+export interface CalculatorComponentValue {
   value: number;
   cards: number[
     ];

@@ -1,1 +1,105 @@
-<p>price-picker works!</p>
+<!-- main content (input)="search(searchBox.valueAsNumber) -->
+<form [formGroup]="searchForm">
+  <button mat-icon-button type="button" color="accent" aria-label="minus icon button" (click)="previousCombination(searchBox.valueAsNumber)">
+    <mat-icon svgIcon="minusCircle"></mat-icon>
+  </button>
+  <mat-form-field class="amountPicker">
+    <mat-label for="search-box">Montant Désiré</mat-label>
+    <input matInput #searchBox id="search-box" type="number" formControlName="searchInput">
+    <button *ngIf="searchBox.valueAsNumber" type="button" matSuffix mat-icon-button aria-label="Clear" (click)="searchBox.value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-icon-button type="button" color="accent" aria-label="plus icon button" (click)="nextCombination(searchBox.valueAsNumber)">
+    <mat-icon svgIcon="plusCircle"></mat-icon>
+  </button>
+  <div class="validButtonContainer">
+    <button mat-raised-button color="accent" (click)="validateAmount()">
+      VALIDER
+    </button>
+  </div>
+</form>
+<mat-card *ngIf="searchBox.value && isAmountValidated">
+  <mat-card-header>
+    <span *ngIf="equalCards.length > 0">
+      Votre montant est composé de(s) carte(s) suivante(s) :
+    </span>
+    <span *ngIf="equalCards.length == 0">
+      Votre montant exact n'existe pas, voici une/des alternative(s) :
+    </span>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngIf="equalCards" class="amountFound">
+      <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let value of equalCards">
+          <mat-icon svgIcon="cardItem" aria-label="euro symbol" mat-list-icon></mat-icon>
+          <span class="cardValue">{{value}} €</span>
+        </mat-list-item>
+      </mat-list>
+      <div *ngIf="equalCards[0] !== floorCards[0] || equalCards[0] !== ceilCards[0]" class="multipleEqualOptions">
+        <span>
+          Autre(s) option(s):
+        </span>
+        <mat-grid-list cols="2" rowHeight="3:2">
+          <mat-grid-tile *ngIf="floorCards[0] !== equalCards[0]" mat-ripple>
+            <mat-list role="list">
+              <mat-list-item role="listitem" *ngFor="let value of floorCards">
+                <mat-icon svgIcon="cardItem" aria-label="euro symbol" mat-list-icon></mat-icon>
+                <span class="cardValue">{{value}} €</span>
+              </mat-list-item>
+            </mat-list>
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="ceilCards[0] !== equalCards[0]" mat-ripple>
+            <mat-list role="list">
+              <mat-list-item role="listitem" *ngFor="let value of ceilCards">
+                <mat-icon svgIcon="cardItem" aria-label="euro symbol" mat-list-icon></mat-icon>
+                <span class="cardValue">{{value}} €</span>
+              </mat-list-item>
+            </mat-list>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+    <div *ngIf="equalCards.length == 0" class="amountNotFound">
+      <mat-grid-list cols="2" rowHeight="3:2">
+        <mat-grid-tile *ngIf="floorCards.length > 0" mat-ripple (click)="amountChange(floorValue)">
+          <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let value of floorCards">
+              <mat-icon svgIcon="cardItem" aria-label="euro symbol" mat-list-icon></mat-icon>
+              <span class="cardValue">{{value}} €</span>
+            </mat-list-item>
+          </mat-list>
+          <mat-grid-tile-footer [style.background-color]="'transparent'">
+            <mat-icon svgIcon="chooseIcon" color="accent"></mat-icon>
+          </mat-grid-tile-footer>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="ceilCards.length > 0" mat-ripple (click)="amountChange(ceilValue)">
+          <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let value of ceilCards">
+              <mat-icon svgIcon="cardItem" aria-label="euro symbol" mat-list-icon></mat-icon>
+              <span class="cardValue">{{value}} €</span>
+            </mat-list-item>
+          </mat-list>
+          <mat-grid-tile-footer [style.background-color]="'transparent'">
+            <mat-icon svgIcon="chooseIcon" color="accent"></mat-icon>
+          </mat-grid-tile-footer>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!--<div>
+  <form [formGroup]="searchForm">
+    <input type="number" formControlName="searchInput" class="amountPicker">
+    <button (click)="validateAmount()" class="validButton">VALIDATE</button>
+  </form>
+  <div *ngIf="isAmountValidated">
+    <ul>
+      <li *ngFor="let value of equalCards">
+        {{value}}
+      </li>
+    </ul>
+  </div>
+
+</div>-->
