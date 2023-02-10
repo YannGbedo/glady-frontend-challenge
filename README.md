@@ -2,6 +2,7 @@
 This is my attempt at solving the challenge to join the Glady Team( formerly WeDooGift )
 
 ## Changes to the calculator-server
+PS: I added the calculator server to this git just in case but I did not directly link it to the angular project so it still  needs to be installed and launched on its own
 
 Because I never make things easy for myself - and because things usually end up easier in the long run if you take some pains
 in the beginning -, I decided to take a look at the provided calculator server and make a few changes.
