@@ -36,7 +36,7 @@
           <span class="cardValue">{{value}} €</span>
         </mat-list-item>
       </mat-list>
-      <div *ngIf="equalCards[0] !== floorCards[0] || equalCards[0] !== ceilCards[0]" class="multipleEqualOptions">
+      <div *ngIf="equalCards.length > 0 && equalCards[0] !== floorCards[0] || equalCards.length > 0 && equalCards[0] !== ceilCards[0]" class="multipleEqualOptions">
         <span>
           Autre(s) option(s):
         </span>
