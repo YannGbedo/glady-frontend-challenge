@@ -121,6 +121,7 @@ export class PricePickerComponent implements OnInit{
         width: '250px',
         enterAnimationDuration: '1000ms',
         exitAnimationDuration: '500ms',
+        data: 'Il semble manquer quelquechose, essaie d\'entrer un montant ?'
       });
     } else {
       this.isAmountValidated = true;
@@ -165,6 +166,13 @@ export class PricePickerComponent implements OnInit{
           }
         } else if (currentValue < this.ceilValue) {
           this.amountChange(this.ceilValue);
+        } else if (currentValue == this.ceilValue) {
+          this.dialog.open(BasicDialogComponent, {
+            width: '250px',
+            enterAnimationDuration: '1000ms',
+            exitAnimationDuration: '500ms',
+            data: 'Pas plus!'
+          });
         }
       });
     }
@@ -180,6 +188,7 @@ export class PricePickerComponent implements OnInit{
         width: '250px',
         enterAnimationDuration: '1000ms',
         exitAnimationDuration: '500ms',
+        data: 'Il semble manquer quelquechose, essaie d\'entrer un montant ?'
       });
     } else {
       this.isAmountValidated = true;
@@ -224,6 +233,13 @@ export class PricePickerComponent implements OnInit{
           }
         } else if (currentValue > this.floorValue) {
           this.amountChange(this.floorValue);
+        } else if (currentValue == this.floorValue) {
+          this.dialog.open(BasicDialogComponent, {
+            width: '250px',
+            enterAnimationDuration: '1000ms',
+            exitAnimationDuration: '500ms',
+            data: 'Pas moins!'
+          });
         }
       });
     }

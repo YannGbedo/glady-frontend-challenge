@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {MatDialogRef} from "@angular/material/dialog";
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-basic-dialog',
@@ -7,5 +7,6 @@ import {MatDialogRef} from "@angular/material/dialog";
   styleUrls: ['./basic-dialog.component.sass']
 })
 export class BasicDialogComponent {
-  constructor(public dialogRef: MatDialogRef<BasicDialogComponent>) {}
+  constructor(public dialogRef: MatDialogRef<BasicDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public message: string) {}
 }
