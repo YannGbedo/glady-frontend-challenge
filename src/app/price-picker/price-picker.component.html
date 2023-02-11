@@ -1,6 +1,6 @@
 <!-- main content (input)="search(searchBox.valueAsNumber) -->
 <form [formGroup]="searchForm">
-  <button mat-icon-button type="button" color="accent" aria-label="minus icon button" (click)="previousCombination(searchBox.valueAsNumber)">
+  <button [matTooltip]="'Previous value'" mat-icon-button type="button" color="accent" aria-label="minus icon button" (click)="previousCombination(searchBox.valueAsNumber)">
     <mat-icon svgIcon="minusCircle"></mat-icon>
   </button>
   <mat-form-field class="amountPicker">
@@ -10,7 +10,7 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
-  <button mat-icon-button type="button" color="accent" aria-label="plus icon button" (click)="nextCombination(searchBox.valueAsNumber)">
+  <button [matTooltip]="'Next value'" mat-icon-button type="button" color="accent" aria-label="plus icon button" (click)="nextCombination(searchBox.valueAsNumber)">
     <mat-icon svgIcon="plusCircle"></mat-icon>
   </button>
   <div class="validButtonContainer">
@@ -62,7 +62,7 @@
     </div>
     <div *ngIf="equalCards.length == 0" class="amountNotFound">
       <mat-grid-list cols="2" rowHeight="3:2">
-        <mat-grid-tile *ngIf="floorCards.length > 0" mat-ripple (click)="amountChange(floorValue)">
+        <mat-grid-tile [matTooltip]="'Choose'" *ngIf="floorCards.length > 0" mat-ripple (click)="amountChange(floorValue)">
           <mat-list role="list">
             <mat-list-item role="listitem" *ngFor="let value of floorCards">
               <mat-icon svgIcon="cardItem" aria-label="euro symbol" mat-list-icon></mat-icon>
@@ -73,7 +73,7 @@
             <mat-icon svgIcon="chooseIcon" color="accent"></mat-icon>
           </mat-grid-tile-footer>
         </mat-grid-tile>
-        <mat-grid-tile *ngIf="ceilCards.length > 0" mat-ripple (click)="amountChange(ceilValue)">
+        <mat-grid-tile [matTooltip]="'Choose'" *ngIf="ceilCards.length > 0" mat-ripple (click)="amountChange(ceilValue)">
           <mat-list role="list">
             <mat-list-item role="listitem" *ngFor="let value of ceilCards">
               <mat-icon svgIcon="cardItem" aria-label="euro symbol" mat-list-icon></mat-icon>
@@ -88,18 +88,3 @@
     </div>
   </mat-card-content>
 </mat-card>
-
-<!--<div>
-  <form [formGroup]="searchForm">
-    <input type="number" formControlName="searchInput" class="amountPicker">
-    <button (click)="validateAmount()" class="validButton">VALIDATE</button>
-  </form>
-  <div *ngIf="isAmountValidated">
-    <ul>
-      <li *ngFor="let value of equalCards">
-        {{value}}
-      </li>
-    </ul>
-  </div>
-
-</div>-->
